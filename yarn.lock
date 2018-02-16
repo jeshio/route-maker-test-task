@@ -4643,6 +4643,10 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
+normalizr@^3.2.4:
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.2.4.tgz#16aafc540ca99dc1060ceaa1933556322eac4429"
+
 npm-run-path@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-2.0.2.tgz#35a9232dfa35d7067b4cb2ddf2357b1871536c5f"
@@ -5562,6 +5566,10 @@ react-test-renderer@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+react-yandex-maps@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/react-yandex-maps/-/react-yandex-maps-2.1.4.tgz#3b8f9a9580ae6b0de841b0a1773eaf28b539db8b"
+
 react@^16.2.0:
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
@@ -5657,6 +5665,13 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-action-creator@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/redux-action-creator/-/redux-action-creator-2.2.1.tgz#a539a4bc6af86b455cbd9fdc13bb8951ce762c78"
+  dependencies:
+    detect-node "^2.0.3"
+    normalizr "^3.2.4"
 
 redux-immutable@^4.0.0:
   version "4.0.0"
