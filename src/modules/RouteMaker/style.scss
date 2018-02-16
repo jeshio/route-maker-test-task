@@ -1,0 +1,15 @@
+@import "~styles/mixins";
+
+.RouteMaker {
+  &__col-left {
+    @include col(4, 4, 4);
+  }
+
+  &__col-right {
+    @include col(8, 8, 8);
+  }
+}
+
+.Map {
+  float: right;
+}

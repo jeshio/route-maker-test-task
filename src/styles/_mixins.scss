@@ -1,0 +1,59 @@
+@import '~foundation-sites/scss/foundation';
+
+@mixin layout() {
+  @include flex-grid-layout(1);
+}
+
+// формирует стили для строки
+@mixin row() {
+  @include flex-grid-row();
+}
+
+// формирует стили для строки без отступов
+@mixin nestRow() {
+  @include flex-grid-row(nest);
+}
+
+// формирует стили для колонки
+// размер блока на мЕньшем экране не может быть меньше, чем на бОльшем экране
+@mixin col(
+  $large: 12,
+  $medium: 12,
+  $small: 12
+) {
+  @include breakpoint(large down) {
+    @include flex-grid-column($large);
+  }
+
+  @include breakpoint(medium down) {
+    @include flex-grid-column(if($medium > $large, $medium, $large));
+  }
+
+  @include breakpoint(small down) {
+    @include flex-grid-column(if($small > $medium, $small, $medium));
+  }
+
+  @include flex-grid-column($large);
+}
+
+// формирует стили для отступа колонки
+// размер отступа на мЕньшем экране не может быть больше, чем на бОльшем экране
+@mixin colOff(
+  $large: 0,
+  $medium: 0,
+  $small: 0
+) {
+  @include breakpoint(large down) {
+    @include grid-column-offset($large);
+  }
+
+  @include breakpoint(medium down) {
+    @include grid-column-offset(if($medium < $large, $medium, $large));
+  }
+
+  @include breakpoint(small down) {
+    @include grid-column-offset(if($small < $medium, $small, $medium));
+  }
+
+  @include grid-column-offset($large);
+}

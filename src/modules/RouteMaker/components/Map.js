@@ -15,25 +15,27 @@ class Map extends Component {
     const { props, state } = this;
 
     return (
-      <YMaps>
-        <YMap state={state}>
-          <Placemark
-            geometry={{
-              coordinates: [55.751574, 37.573856]
-            }}
-            properties={{
-              hintContent: "Собственный значок метки",
-              balloonContent: "Это красивая метка"
-            }}
-            options={{
-              iconLayout: "default#image",
-              iconImageHref: "images/myIcon.gif",
-              iconImageSize: [30, 42],
-              iconImageOffset: [-3, -42]
-            }}
-          />
-        </YMap>
-      </YMaps>
+      <div className="Map">
+        <YMaps>
+          <YMap state={state}>
+            <Placemark
+              geometry={{
+                coordinates: [55.751574, 37.573856]
+              }}
+              properties={{
+                hintContent: "Собственный значок метки",
+                balloonContent: "Это красивая метка"
+              }}
+              options={{
+                iconLayout: "default#image",
+                iconImageHref: "images/myIcon.gif",
+                iconImageSize: [30, 42],
+                iconImageOffset: [-3, -42]
+              }}
+            />
+          </YMap>
+        </YMaps>
+      </div>
     );
   }
 }

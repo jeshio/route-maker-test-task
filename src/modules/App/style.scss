@@ -1,5 +1,18 @@
+@import "~styles/mixins";
+
 .App {
-  text-align: center;
+
+  &__layout {
+    @include layout();
+  }
+
+  &__row {
+    @include row();
+  }
+
+  &__content {
+    @include col();
+  }
 }
 
 .App-logo {

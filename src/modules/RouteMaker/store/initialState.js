@@ -1,5 +1,5 @@
 import { List, Map } from "immutable";
 
 export default Map({
-  points: List()
+  points: List([{ name: "test" }])
 });
