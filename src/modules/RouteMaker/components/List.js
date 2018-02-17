@@ -1,32 +1,66 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import toJSHOC from "modules/Core/hocs/toJS";
+import {
+  SortableContainer,
+  SortableElement,
+  SortableHandle,
+  arrayMove
+} from "react-sortable-hoc";
 
-const List = props => (
-  <div>
+const DragHandle = SortableHandle(() => <span>::</span>);
+
+const SortableItem = SortableElement(({ value, id, deletePoint }) => (
+  <li>
+    <DragHandle />
+    &nbsp;
+    {value}
+    &nbsp;
+    <a
+      href="#"
+      onClick={e => {
+        e.preventDefault();
+        deletePoint(id);
+      }}
+    >
+      x
+    </a>
+  </li>
+));
+
+const SortableList = SortableContainer(({ points, deletePoint }) => {
+  return (
     <ul>
-      {props.points.map(point => (
-        <li key={point.id}>
-          {point.name}
-          <a
-            href="#"
-            onClick={e => {
-              e.preventDefault();
-              props.deletePoint(point.id);
-            }}
-          >
-            x
-          </a>
-        </li>
+      {points.map((point, index) => (
+        <SortableItem
+          key={`point-${point.id}`}
+          index={index}
+          value={point.name}
+          id={point.id}
+          deletePoint={deletePoint}
+        />
       ))}
     </ul>
-  </div>
-);
+  );
+});
 
-List.propTypes = {
-  points: PropTypes.array.isRequired,
-  deletePoint: PropTypes.func.isRequired
-};
+class List extends Component {
+  static propTypes = {
+    points: PropTypes.array.isRequired,
+    deletePoint: PropTypes.func.isRequired,
+    swapPoint: PropTypes.func.isRequired
+  };
+
+  onSortEnd = ({ oldIndex, newIndex }) => {
+    this.props.swapPoint(oldIndex, newIndex);
+  };
+
+  render() {
+    return (
+      <SortableList {...this.props} onSortEnd={this.onSortEnd} useDragHandle />
+    );
+  }
+}
 
 export default List;
 

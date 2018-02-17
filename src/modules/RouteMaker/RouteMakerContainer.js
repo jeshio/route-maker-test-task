@@ -19,7 +19,11 @@ class RouteMakerContainer extends Component {
           />
         }
         listComponent={
-          <Components.List {...props} deletePoint={props.actions.deletePoint} />
+          <Components.List
+            {...props}
+            deletePoint={props.actions.deletePoint}
+            swapPoint={props.actions.swapPoint}
+          />
         }
         pointCreater={
           <Components.PointCreater

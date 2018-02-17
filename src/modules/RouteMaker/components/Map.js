@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { isEqual } from "lodash";
 import { YMaps, Map as YMap, Placemark } from "react-yandex-maps";
 import toJSHOC from "modules/Core/hocs/toJS";
 import List from "./List";
@@ -40,7 +41,7 @@ class Map extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!this.ymaps) return true;
-    if (nextProps.points.length === this.props.points.length) return true;
+    if (isEqual(nextProps.points, this.props.points)) return true;
 
     const { props } = this;
     const ymaps = this.ymaps;
