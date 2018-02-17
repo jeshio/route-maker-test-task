@@ -38,39 +38,37 @@ class Map extends Component {
     });
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.ymaps) return true;
+    if (nextProps.points.length === this.props.points.length) return true;
+
+    const { props } = this;
+    const ymaps = this.ymaps;
+    const points = nextProps.points.map(p => p.coordinates);
+    console.log(points);
+    ymaps.route(points).then(route => {
+      // добавляем маршрут на карту
+      console.log(this.map.geoObjects, route);
+      route.getWayPoints().options.set({
+        draggable: true
+      });
+      const { geoObjects } = this.map;
+      geoObjects.removeAll().add(route);
+    });
+  }
+
   render() {
     const { props, state } = this;
 
     return (
       <div className="Map">
-        <YMaps>
+        <YMaps onApiAvaliable={ymaps => (this.ymaps = ymaps)}>
           <YMap
             state={state}
             onActionEnd={e => this.updateMap(e)}
             onActionBreak={e => this.updateMap(e)}
             instanceRef={ref => (this.map = ref)}
-          >
-            <Placemark
-              geometry={{
-                coordinates: [55.751574, 37.573856]
-              }}
-              properties={{
-                hintContent: "Собственный значок метки",
-                balloonContent: "Это красивая метка"
-              }}
-            />
-            {props.points.map(point => (
-              <Placemark
-                key={point.id}
-                geometry={{
-                  coordinates: point.coordinates
-                }}
-                properties={{
-                  balloonContent: point.name
-                }}
-              />
-            ))}
-          </YMap>
+          />
         </YMaps>
       </div>
     );
