@@ -39,7 +39,7 @@ class Map extends Component {
 
     if (!this.ymaps) return true;
     if (isEqual(nextProps.points, this.props.points)) return true;
-    // fix on one point
+    // fix on one point (route needs 2 points or greater)
     if (points.length <= 1) {
       this.map.geoObjects.removeAll();
       if (points.length === 1) {
@@ -51,7 +51,9 @@ class Map extends Component {
           },
           { draggable: true }
         );
-        placemark.events.add("dragend", e => this.onWaypointDragEnd(e, 0));
+        this.onePointListener = placemark.events.add("dragend", e =>
+          this.onWaypointDragEnd(e, 0)
+        );
         this.map.geoObjects.add(placemark);
       }
     }
@@ -107,8 +109,12 @@ class Map extends Component {
   onWaypointDragEnd(e, defaultIndex) {
     const wayPoint = e.get("target");
     const coords = wayPoint.geometry.getCoordinates();
-    const index = wayPoint.properties.get("index") || defaultIndex;
-    this.props.setCoordinatesPoint(index, coords);
+    const index = wayPoint.properties.get("index");
+
+    this.props.setCoordinatesPoint(
+      index !== undefined ? index : defaultIndex,
+      coords
+    );
   }
 
   render() {

@@ -22,7 +22,7 @@ class PointCreater extends Component {
           name="pointName"
           ref={ref => (this.pointName = ref)}
           placeholder="Введите название точки..."
-          autocomplete="off"
+          autoComplete="off"
         />
       </form>
     );
