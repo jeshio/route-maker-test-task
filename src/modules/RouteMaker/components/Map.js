@@ -66,9 +66,6 @@ class Map extends Component {
     ymaps.route(routePoints).then(route => {
       // добавляем маршрут на карту
       route.editor.start({ editWayPoints: true });
-      // route.getWayPoints().properties.set({
-      //   balloonContent: "test"
-      // });
       if (this.yListeners) this.yListeners.removeAll();
 
       this.yListeners = route
@@ -83,6 +80,14 @@ class Map extends Component {
         });
       const { geoObjects } = this.map;
       geoObjects.removeAll().add(route);
+
+      const { points } = this.props;
+      route.getWayPoints().each(o => {
+        const index = o.properties.get("index");
+        o.properties.set({
+          balloonContent: points[index].name
+        });
+      });
     });
   }
 

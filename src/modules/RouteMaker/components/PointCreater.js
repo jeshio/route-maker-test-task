@@ -10,6 +10,7 @@ class PointCreater extends Component {
   onSubmit(e) {
     e.preventDefault();
     const { value } = this.pointName;
+    if (!value) return;
     this.props.addPoint(value);
     this.pointName.value = "";
   }
