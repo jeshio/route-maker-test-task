@@ -4,7 +4,7 @@ import toJSHOC from "modules/Core/hocs/toJS";
 
 const List = props => (
   <div>
-    <ul>{props.points.map(point => <li>{point.name}</li>)}</ul>
+    <ul>{props.points.map(point => <li key={point.id}>{point.name}</li>)}</ul>
   </div>
 );
 

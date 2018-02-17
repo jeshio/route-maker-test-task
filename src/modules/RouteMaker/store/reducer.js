@@ -1,11 +1,32 @@
-import { pointTypes } from "./actionTypes";
+import { List, Map } from "immutable";
+import { pointTypes, mapParamTypes } from "./actionTypes";
 import initialState from "./initialState";
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case pointTypes.ADD:
-      console.log(pointTypes.ADD, action);
-      return state;
+    case pointTypes.ADD: {
+      const { name } = action.payload;
+      // координаты - текущий центр карты
+      const mapCenter = state.getIn(["mapParams", "center"]);
+      const points = state.get("points");
+      const lastId = points.last() && points.last().get("id");
+      return state.set(
+        "points",
+        points.push(
+          Map({
+            id: (lastId || 0) + 1,
+            name,
+            coordinates: mapCenter
+          })
+        )
+      );
+    }
+    case mapParamTypes.SET: {
+      const { center, zoom } = action.payload.params;
+      return state
+        .setIn(["mapParams", "center"], List(center))
+        .setIn(["mapParams", "zoom"], zoom);
+    }
     default:
       return state;
   }
