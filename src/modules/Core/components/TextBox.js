@@ -4,10 +4,12 @@ import PropTypes from "prop-types";
 class TextBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     onChange: PropTypes.func
   };
 
   static defaultProps = {
+    placeholder: "",
     onChange: () => {}
   };
 
@@ -37,9 +39,11 @@ class TextBox extends Component {
   render() {
     return (
       <input
+        {...this.props}
         type="text"
         value={this.state.value}
         onChange={e => this.onChange(e)}
+        placeholder={this.props.placeholder}
         name={this.props.name}
       />
     );

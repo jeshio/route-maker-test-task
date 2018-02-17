@@ -11,28 +11,30 @@ class RouteMakerContainer extends Component {
   render() {
     const { props } = this;
     return (
-      <Components.RouteMaker
-        mapComponent={
-          <Components.Map
-            {...props}
-            setMapParams={props.actions.setMapParams}
-            setCoordinatesPoint={props.actions.setCoordinatesPoint}
-          />
-        }
-        listComponent={
-          <Components.List
-            {...props}
-            deletePoint={props.actions.deletePoint}
-            swapPoint={props.actions.swapPoint}
-          />
-        }
-        pointCreater={
-          <Components.PointCreater
-            {...props}
-            addPoint={props.actions.addPoint}
-          />
-        }
-      />
+      <div className="RouteMakerContainer">
+        <Components.RouteMaker
+          mapComponent={
+            <Components.Map
+              {...props}
+              setMapParams={props.actions.setMapParams}
+              setCoordinatesPoint={props.actions.setCoordinatesPoint}
+            />
+          }
+          listComponent={
+            <Components.List
+              {...props}
+              deletePoint={props.actions.deletePoint}
+              swapPoint={props.actions.swapPoint}
+            />
+          }
+          pointCreater={
+            <Components.PointCreater
+              {...props}
+              addPoint={props.actions.addPoint}
+            />
+          }
+        />
+      </div>
     );
   }
 }

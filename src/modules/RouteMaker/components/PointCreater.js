@@ -18,7 +18,12 @@ class PointCreater extends Component {
   render() {
     return (
       <form onSubmit={e => this.onSubmit(e)}>
-        <TextBox name="pointName" ref={ref => (this.pointName = ref)} />
+        <TextBox
+          name="pointName"
+          ref={ref => (this.pointName = ref)}
+          placeholder="Введите название точки..."
+          autocomplete="off"
+        />
       </form>
     );
   }

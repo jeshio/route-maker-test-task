@@ -1,9 +1,12 @@
 @import "~styles/mixins";
 
 .App {
-
   &__layout {
     @include layout();
+
+    &.-bg {
+      background: #57bd56;
+    }
   }
 
   &__row {
@@ -12,6 +15,13 @@
 
   &__content {
     @include col();
+    margin-top: 15px;
+  }
+
+  &__header {
+    @include col();
+    padding: 15px 0;
+    color: #fff;
   }
 }
 

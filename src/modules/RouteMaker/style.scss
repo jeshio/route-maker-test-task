@@ -1,15 +1,51 @@
 @import "~styles/mixins";
 
-.RouteMaker {
-  &__col-left {
-    @include col(4, 4, 4);
+.RouteMakerContainer {
+  .RouteMaker {
+    @include foundation-form-text;
+
+    &__col-left {
+      @include col(4, 4, 4);
+    }
+
+    &__col-right {
+      @include col(8, 8, 8);
+    }
   }
 
-  &__col-right {
-    @include col(8, 8, 8);
+  .Map {
+    width: 100%;
+    height: 100%;
   }
 }
 
-.Map {
-  float: right;
+.List {
+  &__item {
+    list-style-type: none;
+    margin-bottom: 15px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    border-top: 1px solid #eee;
+    padding: 5px;
+  }
+
+  &__drag-handler {
+    border-right: 1px solid #eee;
+    padding: 5px;
+    padding-right: 10px;
+    cursor: pointer;
+  }
+
+  &__delete-link {
+    color: #999;
+    float: right;
+    text-decoration: none;
+    font-size: 1.1em;
+    padding: 0 5px;
+    border-left: 1px solid #eee;
+  }
+
+  &__point-name {
+
+  }
 }

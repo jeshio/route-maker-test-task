@@ -8,13 +8,15 @@ import {
   arrayMove
 } from "react-sortable-hoc";
 
-const DragHandle = SortableHandle(() => <span>::</span>);
+const DragHandle = SortableHandle(() => (
+  <span className="List__drag-handler">::</span>
+));
 
 const SortableItem = SortableElement(({ value, id, deletePoint }) => (
-  <li>
+  <li className="List__item">
     <DragHandle />
     &nbsp;
-    {value}
+    <span className="List__point-name">{value}</span>
     &nbsp;
     <a
       href="#"
@@ -22,6 +24,7 @@ const SortableItem = SortableElement(({ value, id, deletePoint }) => (
         e.preventDefault();
         deletePoint(id);
       }}
+      className="List__delete-link"
     >
       x
     </a>
@@ -30,7 +33,7 @@ const SortableItem = SortableElement(({ value, id, deletePoint }) => (
 
 const SortableList = SortableContainer(({ points, deletePoint }) => {
   return (
-    <ul>
+    <ul className="List">
       {points.map((point, index) => (
         <SortableItem
           key={`point-${point.id}`}
