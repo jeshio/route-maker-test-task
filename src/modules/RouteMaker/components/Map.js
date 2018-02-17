@@ -44,14 +44,18 @@ class Map extends Component {
 
     const { props } = this;
     const ymaps = this.ymaps;
-    const points = nextProps.points.map(p => p.coordinates);
+    const points = nextProps.points.map(p => ({
+      type: "wayPoint",
+      point: p.coordinates,
+      balloon: p.name
+    }));
     console.log(points);
     ymaps.route(points).then(route => {
       // добавляем маршрут на карту
-      console.log(this.map.geoObjects, route);
-      route.getWayPoints().options.set({
-        draggable: true
-      });
+      route.editor.start({ editWayPoints: true });
+      // route.getWayPoints().options.set({
+      //   draggable: true
+      // });
       const { geoObjects } = this.map;
       geoObjects.removeAll().add(route);
     });
