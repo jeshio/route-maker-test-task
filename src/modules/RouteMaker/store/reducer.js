@@ -21,6 +21,12 @@ export default (state = initialState, action = {}) => {
         )
       );
     }
+    case pointTypes.DELETE: {
+      const { id } = action.payload;
+      const points = state.get("points");
+      const needleIndex = points.findIndex(p => p.get("id") === id);
+      return state.set("points", points.delete(needleIndex));
+    }
     case mapParamTypes.SET: {
       const { center, zoom } = action.payload.params;
       return state

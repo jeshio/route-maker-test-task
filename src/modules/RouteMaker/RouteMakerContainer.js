@@ -18,7 +18,9 @@ class RouteMakerContainer extends Component {
             setMapParams={props.actions.setMapParams}
           />
         }
-        listComponent={<Components.List {...props} />}
+        listComponent={
+          <Components.List {...props} deletePoint={props.actions.deletePoint} />
+        }
         pointCreater={
           <Components.PointCreater
             {...props}
