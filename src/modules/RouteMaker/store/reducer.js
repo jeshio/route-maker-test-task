@@ -1,4 +1,4 @@
-import { List, Map } from "immutable";
+import { List, Map, fromJS } from "immutable";
 import { pointTypes, mapParamTypes } from "./actionTypes";
 import initialState from "./initialState";
 
@@ -35,6 +35,10 @@ export default (state = initialState, action = {}) => {
       return state
         .setIn(["points", newIndex], swapPoint)
         .setIn(["points", oldIndex], tempPoint);
+    }
+    case pointTypes.SET_COORDS: {
+      const { index, coordinates } = action.payload;
+      return state.setIn(["points", index, "coordinates"], fromJS(coordinates));
     }
     case mapParamTypes.SET: {
       const { center, zoom } = action.payload.params;

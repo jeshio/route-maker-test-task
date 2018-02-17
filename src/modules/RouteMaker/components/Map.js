@@ -17,7 +17,8 @@ class Map extends Component {
   static propTypes = {
     points: PropTypes.array.isRequired,
     mapParams: PropTypes.object.isRequired,
-    setMapParams: PropTypes.func.isRequired
+    setMapParams: PropTypes.func.isRequired,
+    setCoordinatesPoint: PropTypes.func.isRequired
   };
 
   componentWillMount() {
@@ -27,6 +28,19 @@ class Map extends Component {
       center: mapParams.center,
       zoom: mapParams.zoom
     });
+  }
+
+  componentDidMount() {
+    this.updateRoute(this.props.points);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.ymaps) return true;
+    if (isEqual(nextProps.points, this.props.points)) return true;
+
+    const ymaps = this.ymaps;
+    const { points } = nextProps;
+    this.updateRoute(points);
   }
 
   updateMap() {
@@ -39,31 +53,41 @@ class Map extends Component {
     });
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!this.ymaps) return true;
-    if (isEqual(nextProps.points, this.props.points)) return true;
-
-    const { props } = this;
+  updateRoute(points) {
     const ymaps = this.ymaps;
-    const points = nextProps.points.map(p => ({
+    if (!ymaps) return false;
+
+    const routePoints = points.map(p => ({
       type: "wayPoint",
       point: p.coordinates,
-      balloon: p.name
+      balloon: p.name,
+      name: p.name
     }));
-    console.log(points);
-    ymaps.route(points).then(route => {
+    ymaps.route(routePoints).then(route => {
       // добавляем маршрут на карту
       route.editor.start({ editWayPoints: true });
-      // route.getWayPoints().options.set({
-      //   draggable: true
+      // route.getWayPoints().properties.set({
+      //   balloonContent: "test"
       // });
+      if (this.yListeners) this.yListeners.removeAll();
+
+      this.yListeners = route
+        .getWayPoints()
+        .events.group()
+        .add("dragend", e => {
+          // on drag waypoint update coords in store
+          const wayPoint = e.get("target");
+          const coords = wayPoint.geometry.getCoordinates();
+          const index = wayPoint.properties.get("index");
+          this.props.setCoordinatesPoint(index, coords);
+        });
       const { geoObjects } = this.map;
       geoObjects.removeAll().add(route);
     });
   }
 
   render() {
-    const { props, state } = this;
+    const { state } = this;
 
     return (
       <div className="Map">
@@ -79,8 +103,6 @@ class Map extends Component {
     );
   }
 }
-
-Map.propTypes = {};
 
 export default Map;
 

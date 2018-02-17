@@ -8,6 +8,11 @@ export const swapPoint = actionCreator(
   "oldIndex",
   "newIndex"
 );
+export const setCoordinatesPoint = actionCreator(
+  actionTypes.pointTypes.SET_COORDS,
+  "index",
+  "coordinates"
+);
 export const setMapParams = actionCreator(
   actionTypes.mapParamTypes.SET,
   "params"

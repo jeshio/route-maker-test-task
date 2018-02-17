@@ -16,6 +16,7 @@ class RouteMakerContainer extends Component {
           <Components.Map
             {...props}
             setMapParams={props.actions.setMapParams}
+            setCoordinatesPoint={props.actions.setCoordinatesPoint}
           />
         }
         listComponent={
