@@ -29,7 +29,6 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "babel-jest": "^22.2.2",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "eslint": "^4.17.0",
@@ -38,11 +37,11 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.6.1",
-    "jest": "^20.0.4",
     "node-sass": "^4.7.2",
     "prettier": "1.10.2",
     "react-app-rewired": "^1.4.1",
     "react-test-renderer": "^16.2.0",
+    "redux-mock-store": "^1.5.1",
     "sass-loader": "^6.0.6"
   }
 }

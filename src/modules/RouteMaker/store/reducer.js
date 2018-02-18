@@ -41,7 +41,7 @@ export default (state = initialState, action = {}) => {
       return state.setIn(["points", index, "coordinates"], fromJS(coordinates));
     }
     case mapParamTypes.SET: {
-      const { center, zoom } = action.payload.params;
+      const { center, zoom } = action.payload;
       return state
         .setIn(["mapParams", "center"], List(center))
         .setIn(["mapParams", "zoom"], zoom);

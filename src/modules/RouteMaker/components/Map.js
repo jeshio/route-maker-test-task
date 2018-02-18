@@ -66,10 +66,7 @@ class Map extends Component {
     const center = this.map.getCenter();
     const zoom = this.map.getZoom();
 
-    this.props.setMapParams({
-      center,
-      zoom
-    });
+    this.props.setMapParams(center, zoom);
   }
 
   updateRoute(points) {

@@ -15,5 +15,6 @@ export const setCoordinatesPoint = actionCreator(
 );
 export const setMapParams = actionCreator(
   actionTypes.mapParamTypes.SET,
-  "params"
+  "center",
+  "zoom"
 );
